@@ -1,0 +1,76 @@
+# Zadanie z listy zadań kursu 'Rozszerzony kurs języka Python' prowadzonego na Uniwersytecie Wrocławskim.
+# Lista 1 - zadanie 1
+
+import random
+
+def rzut_kostka():
+    rzut = random.randint(1, 6)
+    return rzut
+
+def main(tury):
+    rzut1_g1 = rzut_kostka()
+    rzut2_g1 = rzut_kostka()
+    rzut1_g2 = rzut_kostka()
+    rzut2_g2 = rzut_kostka()
+    suma_t_g1 = rzut1_g1 + rzut2_g1
+    suma_t_g2 = rzut1_g2 + rzut2_g2
+    zwyciestwa_g1 = 0
+    zwyciestwa_g2 = 0
+    porazki_g1 = 0
+    porazki_g2 = 0
+
+    for tura in range(1, tury + 1):
+
+        print("\nTura:", tura, end="\n")
+        print("Gracz 1 >>>", "Rzut 1:", rzut1_g1, "- Rzut 2:", rzut2_g1, "- Suma:", suma_t_g1)
+        print("Gracz 2 >>>", "Rzut 1:", rzut1_g2, "- Rzut 2:", rzut2_g2, "- Suma:", suma_t_g2)
+
+        if suma_t_g1 > suma_t_g2:
+            print("\nWygral gracz 1\n")
+            zwyciestwa_g1 += 1
+            porazki_g2 += 1
+        elif suma_t_g1 < suma_t_g2:
+            print("\nWygral gracz 2\n")
+            zwyciestwa_g2 += 1
+            porazki_g1 += 1
+        else:
+            print("\nRemis\n")
+
+        gracz1_rank = ["Gracz 1", ["Zwyciestwa", zwyciestwa_g1], ["Porazki", porazki_g1]]
+        gracz2_rank = ["Gracz 2", ["Zwyciestwa", zwyciestwa_g2], ["Porazki", porazki_g2]]
+
+        print("Ranking ogolny:")
+        print(gracz1_rank, end="\n")
+        print(gracz2_rank, end="\n")
+        print("\n--------------------------------")
+
+    if zwyciestwa_g1 > zwyciestwa_g2:
+        print("\n\nGre wygral gracz 1")
+    elif zwyciestwa_g1 < zwyciestwa_g2:
+        print("\n\nGre wygral gracz 2")
+    else:
+        print("\n\nDogrywka do pierwszego zwyciestwa!")
+        dogrywka()
+
+def dogrywka():
+    rzut1_g1 = rzut_kostka()
+    rzut2_g1 = rzut_kostka()
+    rzut1_g2 = rzut_kostka()
+    rzut2_g2 = rzut_kostka()
+    suma_d_g1 = rzut1_g1 + rzut2_g1
+    suma_d_g2 = rzut1_g2 + rzut2_g2
+
+    print("Gracz 1 >>>", "Rzut 1:", rzut1_g1, "- Rzut 2:", rzut2_g1, "- Suma:", suma_d_g1)
+    print("Gracz 2 >>>", "Rzut 1:", rzut1_g2, "- Rzut 2:", rzut2_g2, "- Suma:", suma_d_g2)
+
+    if suma_d_g1 > suma_d_g2:
+        print("\nWygral gracz 1!\n")
+    elif suma_d_g1 < suma_d_g2:
+        print("\nWygral gracz 2!\n")
+    else:
+        print("\nKolejna tura\n")
+        dogrywka()
+
+tury = int(input("Wprowadz liczbe tur: "))
+
+main(tury)
